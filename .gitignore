@@ -1,0 +1,17 @@
+# Maven build directory
+target
+
+# Java JAR files
+*.jar
+
+# Documentation build artifacts.
+docs/_build
+
+# Logger output
+*.log
+
+# Copies of JSON files in the root directory
+./*.json
+
+# Helper files.
+build.cmd
