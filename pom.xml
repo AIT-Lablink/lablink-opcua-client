@@ -48,7 +48,7 @@
     <repository>
       <id>github</id>
       <name>GitHub AIT-Lablink Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ait-lablink/lablink-opcua-client-base</url>
+      <url>https://maven.pkg.github.com/ait-lablink/lablink-opcua-client</url>
     </repository>
 
   </distributionManagement>
@@ -254,7 +254,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
 
