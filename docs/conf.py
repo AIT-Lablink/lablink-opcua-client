@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Base functionality for OPC UA-compliant Lablink clients'
+project = 'Lablink OPC UA client'
 copyright = 'AIT Austrian Institute of Technology GmbH'
 author = 'AIT Lablink Development Team'
 
@@ -102,7 +102,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'AITLablinkOPCUAClientBase'
+htmlhelp_basename = 'AITLablinkOPCUAClient'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -129,7 +129,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'AITLablinkOPCUAClientBase.tex', 'Base functionality for OPC UA-compliant Lablink clients',
+    (master_doc, 'AITLablinkOPCUAClient.tex', 'Lablink OPC UA client',
      'AIT Lablink Development Team', 'manual'),
 ]
 
@@ -139,7 +139,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'aitlablinkopcuaclientbase', 'Base functionality for OPC UA-compliant Lablink clients',
+    (master_doc, 'aitlablinkopcuaclient', 'Lablink OPC UA client',
      [author], 1)
 ]
 
@@ -150,8 +150,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'AITLablinkOPCUAClientBase', 'Base functionality for OPC UA-compliant Lablink clients',
-     author, 'AITLablinkOPCUAClientBase', 'Base functionality for OPC UA-compliant Lablink clients',
+    (master_doc, 'AITLablinkOPCUAClient', 'Lablink OPC UA client',
+     author, 'AITLablinkOPCUAClient', 'Lablink OPC UA client',
      'Miscellaneous'),
 ]
 
