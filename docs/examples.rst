@@ -67,7 +67,7 @@ To run the example, execute all scripts either in separate command prompt window
 * :github_blob:`writer.cmd <examples/1_read_write/writer.cmd>`: runs the client that writes values to the OPC UA server
 * :github_blob:`reader.cmd <examples/1_read_write/reader.cmd>`: runs the client that reads values from the OPC UA server
 
-The order in which the scripts are started is arbitrary.
+.. note:: The order in which the scripts are started is arbitrary.
 
 Once the write-only client client starts up, the client shell can be used to interact with the OPC UA server.
 To start with, you can type ``ls`` to list all available data services:
