@@ -4,54 +4,56 @@ Overview
 The configuration has to be JSON-formatted.
 It is divided into the following categories:
 
-* **Client**: basic configuration of the Lablink client
-* **Config-OPC-UA**: basic configuration related to the OPC UA client
-* **Input**: configuration of the client's inputs, each associated to an OPC UA node
-* **Output**: configuration of the client's outputs, each associated to an OPC UA node
+  :*Client*: basic configuration of the Lablink client (JSON object)
+  :*Config-OPC-UA*: basic configuration related to the OPC UA client (JSON object)
+  :*Input*: configuration of the client's inputs, each associated to an OPC UA node (JSON array of JSON objects)
+  :*Output*: configuration of the client's outputs, each associated to an OPC UA node (JSON array of JSON objects)
+
+In the following, the configuration parameters for these categories are listed.
+
+.. seealso:: See `below <#example-configuration>`_ for an example of a complete JSON configuration.
 
 Basic Lablink Client Configuration
 ==================================
 
-Required parameters:
+.. topic:: Required parameters
 
-* **ClientName**: client name
-* **GroupName**: group name
-* **ScenarioName**: scenario name
-* **labLinkPropertiesUrl**: URI to Lablink configuration
-* **syncHostPropertiesUrl**: URI to sync host configuration (*currently not supported, use dummy value here*)
+  :*ClientName*: client name
+  :*GroupName*: group name
+  :*ScenarioName*: scenario name
+  :*labLinkPropertiesUrl*: URI to Lablink configuration
+  :*syncHostPropertiesUrl*: URI to sync host configuration (*currently not supported, use dummy value here*)
 
-Optional parameters:
+.. topic:: Optional parameters
 
-* **ClientDescription**: description of the client
-* **ClientShell**: activate Lablink shell (default: ``false``).
+  :*ClientDescription*: description of the client
+  :*ClientShell*: activate Lablink shell (default: ``false``).
 
 OPC UA Client Configuration
 ===========================
 
-Required parameters:
+.. topic:: Required parameters
 
-* **EndpointURL**: URL of OPC UA server
-* **NamespaceURI**: URI of OPC UA server namespace
-* **ClientURI**: URI of Lablink OPC UA client
+  :*EndpointURL*: URL of OPC UA server
+  :*NamespaceURI*: URI of OPC UA server namespace
+  :*ClientURI*: URI of Lablink OPC UA client
 
-Optional parameters for **BasicOpcUaClient**:
+.. topic:: Optional parameters for **BasicOpcUaClient**
 
-* **DefaulSamplingInterval_ms**: sampling interval for OPC UA server subscription
+  :*DefaulSamplingInterval_ms*: sampling interval for OPC UA server subscription
 
 Input and Output Configuration
 ==============================
 
-Configuration for each input/output.
+.. topic:: Required configuration parameters for each input/output
 
-Required parameters:
-
-* **Name**: name of the client's input/output data service
-* **DataType**: data type of the client's input/output data service; allowed values are ``double``, ``long``, ``boolean`` and ``string``
-* **NodeIdString** or **NodeIdStringNumeric**: ID of associated OPC UA server node
-
-Optional parameters:
-
-* **Unit**: unit associated to the client's input/output data service
+  :*Name:*: name of the client's input/output data service
+  :*DataType*: data type of the client's input/output data service; allowed values are ``double``, ``long``, ``boolean`` and ``string``
+  :*NodeIdString* or **NodeIdStringNumeric**: ID of associated OPC UA server node
+  
+.. topic:: Optional configuration parameters for each input/output
+  
+  :*Unit*: unit associated to the client's input/output data service
 
 Example Configuration
 =====================

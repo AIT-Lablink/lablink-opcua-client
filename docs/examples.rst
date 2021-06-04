@@ -17,11 +17,9 @@ Starting the configuration server
 Start the configuration server by executing script :github_blob:`run_config.cmd <examples/0_config/lablink/run_config.cmd>` in subdirectory :github_tree:`examples/0_config/lablink`.
 This will make the content of database file *example-lablink-config.db* available via http://localhost:10101.
 
-**NOTE**:
-Once the server is running, you can view the available configurations in a web browser via http://localhost:10101.
+.. note:: Once the server is running, you can view the available configurations in a web browser via http://localhost:10101.
 
-**TIP**:
-A convenient tool for viewing the content of the database file (and editing it for experimenting with the examples) is `DB Browser for SQLite <https://sqlitebrowser.org/>`_.
+.. seealso:: A convenient tool for viewing the content of the database file (and editing it for experimenting with the examples) is `DB Browser for SQLite <https://sqlitebrowser.org/>`_.
 
 
 Required OPC UA resources
@@ -34,8 +32,7 @@ Use ``pip`` to install all required Python packages:
 
    pip install -r requirements.txt
 
-**NOTE**:
-This setup has been tested with Python 3.8.5, you may have to adapt the package versions in file ``requirements.txt`` for other versions of Python.
+.. note:: This setup has been tested with Python 3.8.5, you may have to adapt the package versions in file ``requirements.txt`` for other versions of Python.
 
 
 Starting the OPC UA test server
