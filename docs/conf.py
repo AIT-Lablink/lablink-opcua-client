@@ -178,6 +178,6 @@ epub_exclude_files = ['search.html']
 
 # External link library
 extlinks = {
-    'github_blob': ('https://github.com/AIT-Lablink/lablink-opcua-client-base/blob/main/%s', ''),
-    'github_tree': ('https://github.com/AIT-Lablink/lablink-opcua-client-base/tree/main/%s', ''),
+    'github_blob': ('https://github.com/AIT-Lablink/lablink-opcua-client-base/blob/master/%s', ''),
+    'github_tree': ('https://github.com/AIT-Lablink/lablink-opcua-client-base/tree/master/%s', ''),
 }
