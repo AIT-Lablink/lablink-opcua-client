@@ -6,7 +6,7 @@ Required Lablink resources
 
 The following Lablink resources are required for running the examples:
 
-* `Configuration Server <https://ait-lablink.readthedocs.io/projects/lablink-config-server>`__: *config-0.1.0-jar-with-dependencies.jar*
+* `Configuration Server <https://ait-lablink.readthedocs.io/projects/ait-lablink-config-server>`__: * config-0.1.0-jar-with-dependencies.jar*
 
 When :doc:`building from source <installation>`, the corresponding JAR files will be copied to directory *target/dependency*.
 
@@ -20,6 +20,12 @@ This will make the content of database file *example-lablink-config.db* availabl
 .. note:: Once the server is running, you can view the available configurations in a web browser via http://localhost:10101.
 
 .. seealso:: A convenient tool for viewing the content of the database file (and editing it for experimenting with the examples) is `DB Browser for SQLite <https://sqlitebrowser.org/>`_.
+
+
+MQTT broker
+-----------
+
+An **MQTT broker** is required for running the example, for instance `Eclipse Mosquitto <https://mosquitto.org/>`_ or `EMQ <http://emqtt.io/>`_.
 
 
 Required OPC UA resources
