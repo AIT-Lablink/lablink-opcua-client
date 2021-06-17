@@ -8,7 +8,7 @@ REM Connection string for configuration server.
 SET LLCONFIG=http://localhost:10101/get?id=
 
 REM Version of the OPC UA client package.
-SET VERSION=0.0.1
+SET VERSION=0.0.2
 
 REM Root directory of the OPC UA client package (only change this if you really know what you are doing).
 SET OPCUA_CLIENT_ROOT_DIR=%~DP0..
