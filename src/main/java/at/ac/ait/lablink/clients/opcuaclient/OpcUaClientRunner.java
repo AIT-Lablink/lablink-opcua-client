@@ -18,7 +18,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.identity.AnonymousProvider;
 import org.eclipse.milo.opcua.sdk.client.api.identity.IdentityProvider;
-// import org.eclipse.milo.opcua.sdk.client.api.identity.UsernameProvider;
+import org.eclipse.milo.opcua.sdk.client.api.identity.UsernameProvider;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.Stack;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;
@@ -56,6 +56,8 @@ public abstract class OpcUaClientRunner {
   // protected static final String OPCUA_NAMESPACE_INDEX_TAG = "NamespaceIndex";
   protected static final String OPCUA_NAMESPACE_URI_TAG = "NamespaceURI";
   protected static final String OPCUA_CLIENT_URI_TAG = "ClientURI";
+  protected static final String OPCUA_USER_TAG = "Username";
+  protected static final String OPCUA_PWD_TAG = "Password";
 
   /** Logger. */
   protected static final Logger logger = LogManager.getLogger("OpcUaClientRunner");
@@ -77,6 +79,12 @@ public abstract class OpcUaClientRunner {
 
   /** Client URI. */
   private String clientUri;
+
+  /** Username. */
+  private String username;
+
+  /** Client URI. */
+  private String password;
 
   /**
    * Start the event loop of the Lablink client.
@@ -119,6 +127,14 @@ public abstract class OpcUaClientRunner {
     clientUri = ConfigUtil.<String>getRequiredConfigParam(
         opcuaClientConfig, OPCUA_CLIENT_URI_TAG,
         String.format("OPC UC client URI ('%1$s') is missing", OPCUA_CLIENT_URI_TAG));
+        
+    username = ConfigUtil.getOptionalConfigParam(
+        opcuaClientConfig, OPCUA_USER_TAG, null
+    );
+
+    password = ConfigUtil.getOptionalConfigParam(
+        opcuaClientConfig, OPCUA_PWD_TAG, null
+    );
   }
 
   /**
@@ -258,8 +274,26 @@ public abstract class OpcUaClientRunner {
   }
 
   protected IdentityProvider getIdentityProvider() {
-    return new AnonymousProvider(); // FIXME: make configurable via configureOpcUaClient(...)
-    //return new UsernameProvider("user", "password");
+    if (username != null && password != null) {
+      // In case username and password have been supplied in the configuration,
+      // use them for accessing the OPC UA server.
+      logger.info("Connect to OPC UA server using the credentials provided " 
+          + "in the configuration (username & password)");
+      return new UsernameProvider(username, password);
+    } else {
+      // Issue a warning in case of incomplete access credentials.
+      if (username != null) {
+        logger.warn("Incomplete credentials (password missing), try to "
+            + "establish an anonymous connection");
+      } else if (password != null) {
+        logger.warn("Incomplete credentials (username missing), try to "
+            + "establish an anonymous connection");
+      }
+
+      logger.info("Connect to OPC UA server anonymously");
+      return new AnonymousProvider();
+    }
+    
   }
 
   protected void shutdownHook() {
