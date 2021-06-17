@@ -8,7 +8,7 @@ Include the Lablink OPC UA client to your own Maven setup by including the follo
    <dependency>
      <groupId>at.ac.ait.lablink.clients</groupId>
      <artifactId>opcuaclient</artifactId>
-     <version>0.0.1</version>
+     <version>0.0.2</version>
    </dependency>
 
 

@@ -71,3 +71,9 @@ Find step-by-step instructions for running the examples :doc:`here <examples>`.
    :caption: Examples
 
    /examples
+
+Version history
+===============
+
+:0.0.1: initial version
+:0.0.2: add login via username & password

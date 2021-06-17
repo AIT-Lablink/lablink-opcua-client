@@ -40,7 +40,11 @@ OPC UA Client Configuration
 
 .. topic:: Optional parameters for **BasicOpcUaClient**
 
-  :*DefaulSamplingInterval_ms*: sampling interval for OPC UA server subscription
+  :*Username*: username for accessing the OPC UA server
+  :*Password*: password for accessing the OPC UA server
+  :*DefaulSamplingInterval_ms*: sampling interval for OPC UA server subscription (default: ``1000``)
+
+.. note:: In case no login credentials are provided (username *and* password), the client will attempt to connect as anonymous user.
 
 Input and Output Configuration
 ==============================
@@ -73,10 +77,12 @@ The following is an example configuration for a *BasicOpcUaClient* client:
          "syncHostPropertiesUrl": "http://localhost:10101/get?id=ait.all.sync-host.properties"
       },
       "Config-OPC-UA": {
-         "ClientURI": "urn:lablink:clients:opcuaclient:test",
-         "DefaulSamplingInterval_ms": 3000,
          "EndpointURL": "opc.tcp://localhost:12345/lablink-test",
-         "NamespaceURI": "urn:lablink:opcua-test"
+         "NamespaceURI": "urn:lablink:opcua-test",
+         "ClientURI": "urn:lablink:clients:opcuaclient:test",
+         "Username": "LablinkTestUser",
+         "Password": "zQC37UiH6ou",
+         "DefaulSamplingInterval_ms": 3000
       },
       "Input": [
          {
