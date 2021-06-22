@@ -351,6 +351,105 @@ public class DataTypeUtilTest {
   }
 
   @Test
+  public void stringToUByte_test() {
+    String str1 = "123";
+    assertEquals(ubyte(123), DataTypeUtil.stringToUByte(str1));
+
+    String str2 = "123.4";
+    assertEquals(ubyte(123), DataTypeUtil.stringToUByte(str2));
+  }
+
+  @Test
+  public void stringToByte_test() {
+    String str1 = "123";
+    assertEquals(Byte.valueOf((byte) 123), DataTypeUtil.stringToByte(str1));
+
+    String str2 = "123.4";
+    assertEquals(Byte.valueOf((byte) 123), DataTypeUtil.stringToByte(str2));
+  }
+
+  @Test
+  public void stringToUShort_test() {
+    String str1 = "123";
+    assertEquals(ushort(123), DataTypeUtil.stringToUShort(str1));
+
+    String str2 = "123.4";
+    assertEquals(ushort(123), DataTypeUtil.stringToUShort(str2));
+  }
+
+  @Test
+  public void stringToShort_test() {
+    String str1 = "123";
+    assertEquals(Short.valueOf((short) 123), DataTypeUtil.stringToShort(str1));
+
+    String str2 = "123.4";
+    assertEquals(Short.valueOf((short) 123), DataTypeUtil.stringToShort(str2));
+  }
+
+  @Test
+  public void stringToUInt_test() {
+    String str1 = "123";
+    assertEquals(uint(123), DataTypeUtil.stringToUInt(str1));
+
+    String str2 = "123.4";
+    assertEquals(uint(123), DataTypeUtil.stringToUInt(str2));
+  }
+
+  @Test
+  public void stringToInt_test() {
+    String str1 = "123";
+    assertEquals(Integer.valueOf(123), DataTypeUtil.stringToInt(str1));
+
+    String str2 = "123.4";
+    assertEquals(Integer.valueOf(123), DataTypeUtil.stringToInt(str2));
+  }
+
+  @Test
+  public void stringToULong_test() {
+    String str1 = "123";
+    assertEquals(ulong(123), DataTypeUtil.stringToULong(str1));
+
+    String str2 = "123.4";
+    assertEquals(ulong(123), DataTypeUtil.stringToULong(str2));
+  }
+
+  @Test
+  public void stringToLong_test() {
+    String str1 = "123";
+    assertEquals(Long.valueOf(123), DataTypeUtil.stringToLong(str1));
+
+    String str2 = "123.4";
+    assertEquals(Long.valueOf(123), DataTypeUtil.stringToLong(str2));
+  }
+
+  @Test
+  public void stringObjectToLong_test() {
+    String str1 = "123";
+    assertEquals(Long.valueOf(123L), DataTypeUtil.stringToLong((Object) str1));
+
+    String str2 = "123.4";
+    assertEquals(Long.valueOf(123), DataTypeUtil.stringToLong(str2));
+  }
+
+  @Test(expected = NumberFormatException.class)
+  public void stringObjectToLong_invalidCast_test() {
+    String str = "abc";
+    DataTypeUtil.stringToLong((Object) str);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void stringObjectToLong_nullPointer_test() {
+    Object obj = null;
+    DataTypeUtil.stringToLong(obj);
+  }
+
+  @Test
+  public void stringToFloat_test() {
+    String str1 = "12.3";
+    assertEquals(Float.valueOf(12.3f), DataTypeUtil.stringToFloat(str1));
+  }
+
+  @Test
   public void stringObjectToDouble_test() {
     String str1 = "1.23";
     assertEquals(Double.valueOf(1.23d), DataTypeUtil.stringToDouble((Object) str1));
@@ -397,30 +496,6 @@ public class DataTypeUtilTest {
     String str = null;
     DataTypeUtil.stringToDouble(str);
   }
-
-  @Test
-  public void stringObjectToLong_test() {
-    String str1 = "123";
-    assertEquals(Long.valueOf(123L), DataTypeUtil.stringToLong((Object) str1));
-  }
-
-  @Test(expected = NumberFormatException.class)
-  public void stringObjectToLong_invalidCast_test() {
-    String str = "abc";
-    DataTypeUtil.stringToLong((Object) str);
-  }
-
-  @Test(expected = NumberFormatException.class)
-  public void stringObjectToLong_nullPointer_test() {
-    Object obj = null;
-    DataTypeUtil.stringToLong(obj);
-  }
-
-  @Test
-  public void stringToLong_test() {
-    String str1 = "123";
-    assertEquals(Long.valueOf(123L), DataTypeUtil.stringToLong(str1));
- }
 
   @Test
   public void objectToString_test() {

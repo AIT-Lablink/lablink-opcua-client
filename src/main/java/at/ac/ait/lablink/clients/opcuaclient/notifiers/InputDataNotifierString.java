@@ -50,7 +50,51 @@ public class InputDataNotifierString implements IServiceStateChangeNotifier<LlSe
   public InputDataNotifierString(OpcUaClientBase opcuaClient, NodeId nodeId, int dataTypeId) {
     client = opcuaClient;
     id = nodeId;
-    dataTypeCaster = DataTypeUtil::objectToString;
+
+    switch (dataTypeId) {
+      case DataTypeUtil.BOOLEAN:
+        dataTypeCaster = DataTypeUtil::stringToBoolean;
+        break;
+      case DataTypeUtil.SBYTE:
+        dataTypeCaster = DataTypeUtil::stringToUByte;
+        break;
+      case DataTypeUtil.BYTE:
+        dataTypeCaster = DataTypeUtil::stringToByte;
+        break;
+      case DataTypeUtil.UINT16:
+        dataTypeCaster = DataTypeUtil::stringToUShort;
+        break;
+      case DataTypeUtil.UINT32:
+        dataTypeCaster = DataTypeUtil::stringToUInt;
+        break;
+      case DataTypeUtil.UINT64:
+        dataTypeCaster = DataTypeUtil::stringToULong;
+        break;
+      case DataTypeUtil.INT16:
+        dataTypeCaster = DataTypeUtil::stringToShort;
+        break;
+      case DataTypeUtil.INT32:
+        dataTypeCaster = DataTypeUtil::stringToInt;
+        break;
+      case DataTypeUtil.INT64:
+        dataTypeCaster = DataTypeUtil::stringToLong;
+        break;
+      case DataTypeUtil.FLOAT:
+        dataTypeCaster = DataTypeUtil::stringToFloat;
+        break;
+      case DataTypeUtil.DOUBLE:
+        dataTypeCaster = DataTypeUtil::stringToDouble;
+        break;
+      case DataTypeUtil.STRING:
+        dataTypeCaster = DataTypeUtil::identity;
+        break;
+      default:
+        throw new RuntimeException(
+          String.format(
+              "Casting of Double to specified data type (%1$d) not supported.", dataTypeId
+          )
+        );
+    }
   }
 
   /**
