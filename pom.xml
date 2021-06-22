@@ -5,10 +5,31 @@
   <groupId>at.ac.ait.lablink.clients</groupId>
   <artifactId>opcuaclient</artifactId>
   <version>0.0.2</version>
-  <packaging>jar</packaging>
-
   <name>lablink-opcua-client</name>
+  <description>This package provides the base functionality for Lablink clients that use OPC UA for communication.</description>
   <url>https://github.com/AIT-Lablink/lablink-opcua-client</url>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License 2.0</name>
+      <url>https://www.eclipse.org/legal/epl-2.0/</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Edmund Widl</name>
+      <email>edmund.widl@ait.ac.at</email>
+      <organization>AIT Austrian Institute of Technology</organization>
+      <organizationUrl>https://www.ait.ac.at</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/AIT-Lablink/lablink-opcua-client.git</connection>
+    <developerConnection>scm:git:https://github.com/AIT-Lablink/lablink-opcua-client.git</developerConnection>
+    <url>http://github.com/AIT-Lablink/lablink-opcua-client/tree/master</url>
+  </scm>
 
   <properties>
     <maven.compiler.source>13</maven.compiler.source>
@@ -18,51 +39,57 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   
-  <repositories>
-
-    <repository>
-      <id>github</id>
-      <name>GitHub AIT-Lablink Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ait-lablink/lablink-core-java</url>
-    </repository>
-
-    <repository>
-      <id>central</id>
-      <name>Maven Repository Switchboard</name>
-      <layout>default</layout>
-      <url>https://repo1.maven.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-
-  </repositories>
-
   <distributionManagement>
-
-    <repository>
-      <id>github</id>
-      <name>GitHub AIT-Lablink Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/ait-lablink/lablink-opcua-client</url>
-    </repository>
-
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <build>
 
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-        <filtering>true</filtering>
-      </testResource>
-    </testResources>
-
     <plugins>
+
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
