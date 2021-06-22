@@ -32,7 +32,7 @@ Required OPC UA resources
 -------------------------
 
 The example uses a very basic OPC UA server, which is implemented with the help of the `Python OPC-UA client and server library <https://github.com/FreeOpcUa/python-opcua>`_.
-Use ``pip`` to install all required Python packages:
+Use ``pip`` in subdirectory :github_tree:`examples/0_config/opcua` to install all required Python packages:
 
 .. code-block::
 
@@ -44,7 +44,7 @@ Use ``pip`` to install all required Python packages:
 Starting the OPC UA test server
 -------------------------------
 
-Start the OPC UA test server by executing script :github_blob:`example-opcua-server.py <examples/0_config/opcua/example-opcua-server.py>` in subdirectory :github_tree:`examples/0_config/opcua`.
+Start the OPC UA test server by executing script :github_blob:`example-opcua-server.py <examples/0_config/opcua/example-opcua-server.py>` in subdirectory :github_tree:`examples/0_config/opcua`:
 
 .. code-block::
 
