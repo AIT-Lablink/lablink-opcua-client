@@ -5,7 +5,7 @@
   <groupId>at.ac.ait.lablink.clients</groupId>
   <artifactId>opcuaclient</artifactId>
   <version>0.0.2</version>
-  <name>lablink-opcua-client</name>
+  <name>Lablink OPC UA client</name>
   <description>This package provides the base functionality for Lablink clients that use OPC UA for communication.</description>
   <url>https://github.com/AIT-Lablink/lablink-opcua-client</url>
 
