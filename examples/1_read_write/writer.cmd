@@ -3,7 +3,7 @@
 SETLOCAL
 
 REM Load the setup for the examples.
-CALL %~DP0\..\setup.cmd
+CALL "%~DP0\..\setup.cmd"
 
 REM Path to class implementing the main routine.
 SET BASIC_OPCUAC_LIENT=at.ac.ait.lablink.clients.opcuaclient.BasicOpcUaClient
@@ -15,6 +15,6 @@ REM Data point bridge configuration.
 SET CONFIG_FILE_URI=%LLCONFIG%ait.test.opcuaclient.writer.config
 
 REM Run the example.
-"%JAVA_HOME%\bin\java.exe" %LOGGER_CONFIG% -cp %OPCUA_CLIENT_JAR_FILE% %BASIC_OPCUAC_LIENT% -c %CONFIG_FILE_URI%
+"%JAVA_HOME%\bin\java.exe" %LOGGER_CONFIG% -cp "%OPCUA_CLIENT_JAR_FILE%" %BASIC_OPCUAC_LIENT% -c %CONFIG_FILE_URI%
 
 PAUSE
