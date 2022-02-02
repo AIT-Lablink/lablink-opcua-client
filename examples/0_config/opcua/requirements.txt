@@ -1,5 +1,5 @@
 cryptography==3.4.6
-lxml==4.6.2
+lxml==4.6.5
 opcua==0.98.13
 python-dateutil==2.8.1
 pytz==2021.1
