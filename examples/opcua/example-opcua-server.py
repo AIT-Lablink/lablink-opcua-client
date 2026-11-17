@@ -1,6 +1,7 @@
 from opcua import ua, Server
 from opcua.server.user_manager import UserManager
 import code
+import os
 
 # User database.
 users_db = {
@@ -21,7 +22,8 @@ if __name__ == '__main__':
     server = Server()
 
     server.set_server_name('Lablink Test Server')
-    server.set_endpoint('opc.tcp://localhost:12345/lablink-test')
+    server.set_endpoint(os.environ.get(
+        'OPCUA_ENDPOINT', 'opc.tcp://localhost:12345/lablink-test'))
 
     server.set_security_policy([ua.SecurityPolicyType.NoSecurity])
 

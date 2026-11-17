@@ -1,0 +1,75 @@
+services:
+  mqtt:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    # A Windows bind mount is world-writable, which Mosquitto 2 refuses to load.
+    # The copy script has to be a single argument. A plain string is split, and sh -c then runs cp with no arguments.
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - "cp /mosquitto/config/mosquitto.conf /tmp/mosquitto.conf && chmod 600 /tmp/mosquitto.conf && exec /usr/sbin/mosquitto -c /tmp/mosquitto.conf"
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "healthcheck", "-m", "ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  lablink-config:
+    image: ait1/lablink-config-server:latest
+    volumes:
+      - ./config/example-lablink-config.db:/app/config.db
+    ports:
+      - "10101:10101"
+
+  opcua:
+    build: ./opcua
+    hostname: opcua
+    environment:
+      OPCUA_ENDPOINT: opc.tcp://opcua:12345/lablink-test
+    # The server process is a Python console. A TTY keeps that console open
+    # when the service is started in the background.
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('opcua', 12345), 2).close()"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  writer:
+    image: ait1/lablink-opcua-client:latest
+    profiles: ["shell"]
+    stdin_open: true
+    tty: true
+    environment:
+      LLCONFIG: http://lablink-config:10101/get?id=
+      OPCUA_CONFIG: ait.test.opcuaclient.writer.config
+      OPCUA_CLASS: at.ac.ait.lablink.clients.opcuaclient.BasicOpcUaClient
+      LOGGER_ID: ait.all.log4j2
+    depends_on:
+      mqtt:
+        condition: service_healthy
+      lablink-config:
+        condition: service_started
+      opcua:
+        condition: service_healthy
+
+  reader:
+    image: ait1/lablink-opcua-client:latest
+    profiles: ["shell"]
+    stdin_open: true
+    tty: true
+    environment:
+      LLCONFIG: http://lablink-config:10101/get?id=
+      OPCUA_CONFIG: ait.test.opcuaclient.reader.config
+      OPCUA_CLASS: at.ac.ait.lablink.clients.opcuaclient.BasicOpcUaClient
+      LOGGER_ID: ait.all.log4j2
+    depends_on:
+      mqtt:
+        condition: service_healthy
+      lablink-config:
+        condition: service_started
+      opcua:
+        condition: service_healthy
