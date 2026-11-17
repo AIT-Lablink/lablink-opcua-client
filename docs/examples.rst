@@ -1,55 +1,12 @@
 Prerequisites
 =============
 
-Required Lablink resources
---------------------------
+The example runs with Docker Compose.
+These images are published on Docker Hub and are pulled automatically:
 
-The following Lablink resources are required for running the examples:
-
-* `Configuration Server <https://ait-lablink.readthedocs.io/projects/ait-lablink-config-server>`__: * config-0.1.0-jar-with-dependencies.jar*
-
-When :doc:`building from source <installation>`, the corresponding JAR files will be copied to directory *target/dependency*.
-
-
-Starting the configuration server
----------------------------------
-
-Start the configuration server by executing script :github_blob:`run_config.cmd <examples/0_config/lablink/run_config.cmd>` in subdirectory :github_tree:`examples/0_config/lablink`.
-This will make the content of database file *example-lablink-config.db* available via http://localhost:10101.
-
-.. note:: Once the server is running, you can view the available configurations in a web browser via http://localhost:10101.
-
-.. seealso:: A convenient tool for viewing the content of the database file (and editing it for experimenting with the examples) is `DB Browser for SQLite <https://sqlitebrowser.org/>`_.
-
-
-MQTT broker
------------
-
-An **MQTT broker** is required for running the example, for instance `Eclipse Mosquitto <https://mosquitto.org/>`_ or `EMQ <http://emqtt.io/>`_.
-
-
-Required OPC UA resources
--------------------------
-
-The example uses a very basic OPC UA server, which is implemented with the help of the `Python OPC-UA client and server library <https://github.com/FreeOpcUa/python-opcua>`_.
-Use ``pip`` in subdirectory :github_tree:`examples/0_config/opcua` to install all required Python packages:
-
-.. code-block::
-
-   pip install -r requirements.txt
-
-.. note:: This setup has been tested with Python 3.8.5, you may have to adapt the package versions in file ``requirements.txt`` for other versions of Python.
-
-
-Starting the OPC UA test server
--------------------------------
-
-Start the OPC UA test server by executing script :github_blob:`example-opcua-server.py <examples/0_config/opcua/example-opcua-server.py>` in subdirectory :github_tree:`examples/0_config/opcua`:
-
-.. code-block::
-
-   python example-opcua-server.py
-
+* ``ait1/lablink-opcua-client:latest``
+* ``ait1/lablink-config-server:latest``
+* ``eclipse-mosquitto:2``
 
 Example: Reading from and writing to an OPC UA server
 =====================================================
@@ -67,13 +24,29 @@ In this example, two instances of class *BasicOpcUaClient* are used to write/rea
    :align: center
    :alt: Lablink OPC UA example.
 
-All relevant scripts can be found in subdirectory :github_tree:`examples/1_read_write`.
-To run the example, execute all scripts either in separate command prompt windows or by double-clicking:
+The example setup is configured via the Compose file at :github_blob:`examples/docker-compose.yml <examples/docker-compose.yml>`.
+The OPC UA server image is built from :github_tree:`examples/opcua <examples/opcua>`.
+Using a local clone of the repository, change to folder `examples` and start the configuration server, the broker, and the OPC UA server by running:
 
-* :github_blob:`writer.cmd <examples/1_read_write/writer.cmd>`: runs the client that writes values to the OPC UA server
-* :github_blob:`reader.cmd <examples/1_read_write/reader.cmd>`: runs the client that reads values from the OPC UA server
+.. code-block:: bash
 
-.. note:: The order in which the scripts are started is arbitrary.
+   docker compose up -d
+
+.. note:: Once the example is running, the available configurations are listed at http://localhost:10101.
+
+.. seealso:: A convenient tool for viewing the content of the configuration database file (and editing it for experimenting with the example setup) is `DB Browser for SQLite <https://sqlitebrowser.org/>`_.
+
+Start each client shell in its own terminal, from the same directory:
+
+.. code-block:: bash
+
+   docker compose run --rm writer
+
+.. code-block:: bash
+
+   docker compose run --rm reader
+
+.. note:: The order in which the two shells are started is not important.
 
 Once the write-only client client starts up, the client shell can be used to interact with the OPC UA server.
 To start with, you can type ``ls`` to list all available data services:
@@ -115,7 +88,7 @@ When this happens, you should see log outputs in the client's console similar to
    19:01:52.459 [milo-shared-thread-pool-0] INFO  OpcUaClientBase - subscription value received: item=NodeId{ns=2, id=LablinkTest/ScalarTypes/LlTestFloat}, value=Variant{value=12.34}, handle=1
    19:01:52.464 [milo-shared-thread-pool-0] INFO  OpcUaClientBase - subscription value received: item=NodeId{ns=2, id=LablinkTest/ScalarTypes/LlTestFloat}, value=Variant{value=12.34}, handle=10
    19:01:52.469 [milo-shared-thread-pool-0] INFO  OpcUaClientBase - subscription value received: item=NodeId{ns=2, id=LablinkTest/ScalarTypes/LlTestFloat}, value=Variant{value=12.34}, handle=14
-   
+
 To check the actual value of the data services, you can again type ``ls``.
 You will see that the value of ``12.34`` has been received by several data services, with the value cast accordingly to the service's data type:
 
